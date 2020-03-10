@@ -255,6 +255,7 @@ class Dotmailer
 
   /**
    * @param Contact $contact
+   * @param AddressBook $addressBook
    * @param string|null $preferredLocale
    * @param string|null $challengeUrl
    */
