@@ -132,6 +132,7 @@ class Dotmailer
             '/v2/address-books/' . $addressBook->getId(). '/contacts',
             $contact->asArray()
         );
+        return $this->response;
     }
 
     /**
@@ -250,6 +251,31 @@ class Dotmailer
         ];
 
         $this->response = $this->adapter->post('/v2/contacts/resubscribe', array_filter($content));
+    }
+
+  /**
+   * @param Contact $contact
+   * @param string|null $preferredLocale
+   * @param string|null $challengeUrl
+   */
+    public function resubscribeContactToAddressBook(
+        Contact $contact,
+        AddressBook $addressBook,
+        string $preferredLocale = null,
+        string $challengeUrl = null
+    ) {
+        $content = [
+        'unsubscribedContact' => [
+        'email' => $contact->getEmail()
+        ],
+        'preferredLocale' => $preferredLocale,
+        'returnUrlToUseIfChallenged' => $challengeUrl,
+        ];
+
+        $this->response = $this->adapter->post(
+            '/v2/address-books/' . $addressBook->getId(). '/contacts/resubscribe',
+            array_filter($content)
+        );
     }
 
     /**

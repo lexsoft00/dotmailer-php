@@ -276,6 +276,34 @@ class DotmailerTest extends TestCase
         $this->assertEquals($response, $this->dotmailer->getResponse());
     }
 
+    public function testResubscribeContactToAddressBook()
+    {
+        $response = $this->getResponse();
+
+        $this->adapter
+        ->expects($this->once())
+        ->method('post')
+        ->with(
+            '/v2/address-books/' . self::ID . '/contacts/resubscribe',
+            [
+            'unsubscribedContact' => [
+            'email' => self::EMAIL
+            ],
+            'preferredLocale' => self::LOCALE,
+            'returnUrlToUseIfChallenged' => self::WEBSITE,
+            ]
+        )->willReturn($response);
+
+        $this->dotmailer->resubscribeContactToAddressBook(
+            $this->getContact(),
+            $this->getAddressBook(),
+            self::LOCALE,
+            self::WEBSITE
+        );
+
+        $this->assertEquals($response, $this->dotmailer->getResponse());
+    }
+
     public function testCreateContactDataField()
     {
         $dataField = new DataField(self::DATA_FIELD, DataField::TYPE_STRING);
