@@ -55,6 +55,7 @@ Currently the following endpoints are covered:
     - [x] Get unsubscribed contacts since date
     - [x] Unsubscribe contact
     - [x] Resubscribe contact
+    - [x] Resubscribe contact to adress books
 - [ ] **Contact data fields**
     - [x] Create contact data field
     - [x] Delete contact data field
